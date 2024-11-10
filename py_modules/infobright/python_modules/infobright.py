@@ -373,7 +373,8 @@ def metric_init(params):
 	REPORT_MASTER = str(params.get('get_master', True)) == "True"
 	REPORT_SLAVE  = str(params.get('get_slave', True)) == "True"
 
-	logging.debug("init: " + str(params))
+	sanitized_params = {k: v for k, v in params.items() if k != 'passwd'}
+	logging.debug("init: " + str(sanitized_params))
 
 	infobright_conn_opts = dict(
 		user = params.get('user'),
